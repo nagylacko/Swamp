@@ -59,9 +59,17 @@ public class AIPlayer extends Player{
         }
         myText = partyActivity.findViewById(ID);
 
-        myText.setText("AI_player_" + myIndex + "\n" + "Here is the hand ");
+        String temp = "";
+        int i = 0;
+        for(Card card : hand.getCards()){
+            temp += Integer.toString(card.getNumber()) + " ";
+            if(i++ == 6) {
+                temp += "\n";
+                i = 0;
+            }
+        }
 
-        //asdasd
+        myText.setText("AI_player_" + myIndex + "\n" + "Here is the hand:"+ "\n" + temp);
         
     }
 }

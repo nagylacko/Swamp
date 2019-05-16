@@ -12,15 +12,15 @@ public class PartyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party);
 
-        //partyManager.start(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         partyManager.start(this);
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        partyManager.start(this);
+//    }
 
     public static void setPartyManager (PartyManager partyManager) {
         PartyActivity.partyManager = partyManager;

@@ -14,15 +14,6 @@ public class Hand {
         cards = new ArrayList<>();
     }
 
-    //erre csinalni unit testet
-    //most nem tudom, hogy itt kell-e copy-zni, vagy csak oda lehet adni??
-    public Hand(ArrayList<Card> cards) {
-        //this.cards = cards;
-        for(Card card : cards){
-            this.cards.add(card);
-        }
-    }
-
     public void addCard(Card card){
         cards.add(card);
     }
