@@ -61,7 +61,7 @@ public class AIPlayer extends Player{
 
         myText.setText("AI_player_" + myIndex + "\n" + "Here is the hand ");
 
-
+        //asdasd
         
     }
 }
