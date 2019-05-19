@@ -32,7 +32,4 @@ public class Player {
 
     }
 
-    public int hit(){
-        return 0;
-    }
 }

@@ -37,11 +37,4 @@ public class Hand {
         return cards;
     }
 
-    public void hit(int index) {
-
-    }
-
-    public void hit(int index1, int index2) {
-
-    }
 }
