@@ -61,7 +61,7 @@ public class AIPlayer extends Player{
 
         String temp = "";
         int i = 0;
-        for(Card card : hand.getCards()){
+        for(Card card : cards){
             temp += Integer.toString(card.getNumber()) + " ";
             if(i++ == 6) {
                 temp += "\n";

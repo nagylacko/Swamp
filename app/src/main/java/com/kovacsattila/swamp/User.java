@@ -1,10 +1,13 @@
 package com.kovacsattila.swamp;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -21,31 +24,55 @@ public class User extends Player {
     @Override
     public void updateScreen(final PartyActivity partyActivity) {
 
-        LinearLayout player_hand = partyActivity.findViewById(R.id.player_hand);
-
-        int screenWidth = player_hand.getWidth();
+        final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
 
         ArrayList<Button> buttons = new ArrayList<>();
 
-        for (int i = 0; i < hand.getCards().size(); i++) {
-            buttons.add(new Button(partyActivity));
-
-        }
-
-
-//        LinearLayout player_hand = partyActivity.findViewById(R.id.player_hand);
+//        for (int i = 0; i < 10 /*cards.size()*/; i++) {
 //
-//        Button button_card_1 = new Button(partyActivity);
-//        button_card_1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//        button_card_1.setText("Card1");
-//        //button_card_1.setId(button_card_1);
-//        button_card_1.setX(300);
-//        button_card_1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(partyActivity.getApplicationContext(), "Click!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        player_hand.addView(button_card_1);
+//            final Button btn = new Button(partyActivity);
+//            //btn.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT));
+//            btn.setText(Integer.toString(cards.get(i).getNumber()));
+//            //btn.setWidth((int) (0.9 * (partyConstLayout.getWidth() / 12)));
+//            btn.setWidth(40);
+//
+//            btn.setX((int) (i * partyConstLayout.getWidth() / 12));
+//
+//            Log.i("1",Integer.toString((int) (0.9 * (partyConstLayout.getWidth() / 12))));
+//
+//            btn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Button b = (Button) view;
+//                    b.setWidth(20);
+//                }
+//            });
+//
+//            buttons.add(btn);
+//
+//            partyConstLayout.addView(btn);
+//        }
+
+        ImageView img = new ImageView(partyActivity);
+        img.setX(500);
+        img.setY(10);
+
+
+        final Drawable dr = partyActivity.getResources().getDrawable(R.drawable.ace);
+
+        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
+        double ratio = 0.5;
+        Drawable d = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * ratio), (int) (bitmap.getHeight() * ratio), true));
+        //img.setImageResource(R.drawable.ace);
+        img.setImageDrawable(d);
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("1",Integer.toString((int) dr.getMinimumWidth()));
+            }
+        });
+
+        partyConstLayout.addView(img);
     }
 }

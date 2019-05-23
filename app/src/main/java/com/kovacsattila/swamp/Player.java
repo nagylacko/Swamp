@@ -1,12 +1,14 @@
 package com.kovacsattila.swamp;
 
+import java.util.ArrayList;
+
 /**
  * Created by Kovács Attila on 2019-03-18.
  */
 
 public class Player {
 
-    protected Hand hand;
+    protected ArrayList<Card> cards;
 
     protected Role role;
 
@@ -14,18 +16,33 @@ public class Player {
 
     public Player() {
 
-        hand = new Hand();
+        cards = new ArrayList<>();
 
         //
         role = Role.X;
     }
 
-    public Hand getHand() {
-        return hand;
+    public ArrayList<Card> getHand() {
+        return cards;
+    }
+
+    public void addCard (Card card) {
+        cards.add(card);
     }
 
     public void sortCards() {
-        hand.sortCards();
+        boolean flag = true;
+        while (flag) {
+            flag = false;
+            for (int i = 0; i < cards.size() - 1; i++) {
+                if (cards.get(i).getNumber() > cards.get(i + 1).getNumber()) {
+                    Card temp = new Card(cards.get(i));
+                    cards.set(i, cards.get(i + 1));
+                    cards.set(i + 1, temp);
+                    flag = true;
+                }
+            }
+        }
     }
 
     public void updateScreen(final PartyActivity partyActivity) {

@@ -39,7 +39,7 @@ public final class Players {
         ArrayList<Card> cards4deal = new ArrayList<>(cards);
         for(int i = 0; !cards4deal.isEmpty(); i++){
             int r = (int)(Math.random() * cards4deal.size());
-            players.get(i % players.size()).getHand().addCard(cards4deal.get(r));
+            players.get(i % players.size()).addCard(cards4deal.get(r));
             cards4deal.remove(r);
         }
 
