@@ -18,5 +18,7 @@ public class PartyActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
 
         Players.updateScreen(this);
+
+        Players.startParty(this);
     }
 }

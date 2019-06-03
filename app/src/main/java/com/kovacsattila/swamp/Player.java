@@ -26,7 +26,7 @@ public class Player {
         return cards;
     }
 
-    public void addCard (Card card) {
+    public void addCard(Card card) {
         cards.add(card);
     }
 
@@ -35,7 +35,7 @@ public class Player {
         while (flag) {
             flag = false;
             for (int i = 0; i < cards.size() - 1; i++) {
-                if (cards.get(i).getNumber() > cards.get(i + 1).getNumber()) {
+                if (cards.get(i).getRank() > cards.get(i + 1).getRank()) {
                     Card temp = new Card(cards.get(i));
                     cards.set(i, cards.get(i + 1));
                     cards.set(i + 1, temp);
@@ -46,6 +46,19 @@ public class Player {
     }
 
     public void updateScreen(final PartyActivity partyActivity) {
+
+    }
+
+    public void hit() {
+
+    }
+
+    public boolean haveCards() {
+        if (cards.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

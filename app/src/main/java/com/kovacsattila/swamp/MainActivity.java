@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         final Button noAI5 = findViewById(R.id.no_AI_5);
 
         noOfAIs = 1;
-        noAI2.setTextColor(Color.BLACK);
+        noAI2.setTextColor(Color.WHITE);
         noAI2.setTextColor(Color.GRAY);
         noAI3.setTextColor(Color.GRAY);
         noAI4.setTextColor(Color.GRAY);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         noAI1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noAI1.setTextColor(Color.BLACK);
+                noAI1.setTextColor(Color.WHITE);
                 noAI2.setTextColor(Color.GRAY);
                 noAI3.setTextColor(Color.GRAY);
                 noAI4.setTextColor(Color.GRAY);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 noAI1.setTextColor(Color.GRAY);
-                noAI2.setTextColor(Color.BLACK);
+                noAI2.setTextColor(Color.WHITE);
                 noAI3.setTextColor(Color.GRAY);
                 noAI4.setTextColor(Color.GRAY);
                 noAI5.setTextColor(Color.GRAY);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 noAI1.setTextColor(Color.GRAY);
                 noAI2.setTextColor(Color.GRAY);
-                noAI3.setTextColor(Color.BLACK);
+                noAI3.setTextColor(Color.WHITE);
                 noAI4.setTextColor(Color.GRAY);
                 noAI5.setTextColor(Color.GRAY);
                 noOfAIs = 3;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 noAI1.setTextColor(Color.GRAY);
                 noAI2.setTextColor(Color.GRAY);
                 noAI3.setTextColor(Color.GRAY);
-                noAI4.setTextColor(Color.BLACK);
+                noAI4.setTextColor(Color.WHITE);
                 noAI5.setTextColor(Color.GRAY);
                 noOfAIs = 4;
             }
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 noAI2.setTextColor(Color.GRAY);
                 noAI3.setTextColor(Color.GRAY);
                 noAI4.setTextColor(Color.GRAY);
-                noAI5.setTextColor(Color.BLACK);
+                noAI5.setTextColor(Color.WHITE);
                 noOfAIs = 5;
             }
         });

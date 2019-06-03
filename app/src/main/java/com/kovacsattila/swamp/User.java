@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -26,53 +25,90 @@ public class User extends Player {
 
         final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
 
-        ArrayList<Button> buttons = new ArrayList<>();
+        //Calculate the total width in imaginary units
+        //Card width is 100 imaginary unit
+        //Overlap is the width ratio, which can be seen behind the next card
+        double overlap = 0.2;
+        //10 imaginary units at left, cards, 10 at right, in one row
+        double totalImaginaryWidth = 10 + ((cards.size() - 1) * 100 * overlap) + 100 + 10;
+        //Calculating the ratio between the real and imaginary row length
+        //double ratio = totalImaginaryWidth / partyConstLayout.getWidth();
+        double ratio = partyConstLayout.getWidth() / totalImaginaryWidth;
 
-//        for (int i = 0; i < 10 /*cards.size()*/; i++) {
+        for (int i = 0; i < cards.size(); i++) {
+            ImageView card = new ImageView(partyActivity);
+
+            Bitmap bitmap = cards.get(i).getBitmap(partyActivity);
+            //Drawable drawable = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * ratio), (int) (bitmap.getHeight() * ratio), true));
+            Drawable drawable = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) (100 * ratio), (int) (100 * bitmap.getHeight() * ratio / bitmap.getWidth()), true));
+            card.setImageDrawable(drawable);
+
+            //10 imaginary pixels * ratio offset at left
+            card.setX((int) ((10 * ratio) + (i * 100 * ratio * overlap)));
+            card.setY((int) (partyConstLayout.getHeight() * 0.45));
+
+//            Log.i(Integer.toString(i), Integer.toString((partyConstLayout.getHeight() / 2) + (int) (bitmap.getHeight() * ratio) * (int) Math.floor(i / cardsInRow)));
+//            Log.i(Integer.toString(i), Integer.toString((int) (bitmap.getWidth() * ratio)));
+//            Log.i(Integer.toString(i), Integer.toString((int) (bitmap.getHeight() * ratio)));
+
+            final int j = i;
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("click", Integer.toString(cards.get(j).getRank()));
+                }
+            });
+
+            partyConstLayout.addView(card);
+        }
+    }
+
+//    @Override //tested, works fine
+//    public void updateScreen(final PartyActivity partyActivity) {
 //
-//            final Button btn = new Button(partyActivity);
-//            //btn.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT));
-//            btn.setText(Integer.toString(cards.get(i).getNumber()));
-//            //btn.setWidth((int) (0.9 * (partyConstLayout.getWidth() / 12)));
-//            btn.setWidth(40);
+//        final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
 //
-//            btn.setX((int) (i * partyConstLayout.getWidth() / 12));
+//        //Calculating the size of the cards
+//        //10 pixels offset at left, 10 cards in a row, 10% space after each card
+//        int cardsInRow = 12;
+//        double spacing = (partyConstLayout.getWidth() - 10) / cardsInRow;
+//        double cardWidth = spacing * 0.9;
 //
-//            Log.i("1",Integer.toString((int) (0.9 * (partyConstLayout.getWidth() / 12))));
+//        ArrayList<ImageView> cardImages = new ArrayList<>();
 //
-//            btn.setOnClickListener(new View.OnClickListener() {
+//        for (int i = 0; i < cards.size(); i++) {
+//            ImageView card = new ImageView(partyActivity);
+//
+//            Bitmap bitmap = cards.get(i).getBitmap(partyActivity);
+//            double ratio = cardWidth / bitmap.getWidth();
+//            Drawable drawable = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * ratio), (int) (bitmap.getHeight() * ratio), true));
+//            card.setImageDrawable(drawable);
+//
+//            //10 pixels offset at left
+//            card.setX((int) (10 + ((i % cardsInRow) * spacing)));
+//            card.setY((int) (partyConstLayout.getHeight() * 0.45) + (int) (bitmap.getHeight() * ratio * 0.5) * (int) Math.floor(i / cardsInRow));
+//
+////            Log.i(Integer.toString(i), Integer.toString((partyConstLayout.getHeight() / 2) + (int) (bitmap.getHeight() * ratio) * (int) Math.floor(i / cardsInRow)));
+////            Log.i(Integer.toString(i), Integer.toString((int) (bitmap.getWidth() * ratio)));
+////            Log.i(Integer.toString(i), Integer.toString((int) (bitmap.getHeight() * ratio)));
+//
+//            final int j = i;
+//            card.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
-//                    Button b = (Button) view;
-//                    b.setWidth(20);
+//                    Log.i("click", Integer.toString(cards.get(j).getRank()));
 //                }
 //            });
 //
-//            buttons.add(btn);
+//            cardImages.add(card);
 //
-//            partyConstLayout.addView(btn);
+//            partyConstLayout.addView(card);
 //        }
+//    }
 
-        ImageView img = new ImageView(partyActivity);
-        img.setX(500);
-        img.setY(10);
-
-
-        final Drawable dr = partyActivity.getResources().getDrawable(R.drawable.ace);
-
-        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
-        double ratio = 0.5;
-        Drawable d = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * ratio), (int) (bitmap.getHeight() * ratio), true));
-        //img.setImageResource(R.drawable.ace);
-        img.setImageDrawable(d);
-
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("1",Integer.toString((int) dr.getMinimumWidth()));
-            }
-        });
-
-        partyConstLayout.addView(img);
+    @Override
+    public void hit() {
+        Table.getNumber();
+        Table.getRank();
     }
 }
