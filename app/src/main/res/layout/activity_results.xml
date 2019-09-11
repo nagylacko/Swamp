@@ -7,7 +7,7 @@
     tools:context="com.kovacsattila.swamp.PartyActivity">
 
     <TextView
-        android:id="@+id/AI_hand_0"
+        android:id="@+id/opp_hand_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -22,13 +22,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/AI_hand_2"
+        app:layout_constraintEnd_toStartOf="@+id/opp_hand_2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/AI_hand_0"
+        app:layout_constraintStart_toEndOf="@+id/opp_hand_0"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/AI_hand_2"
+        android:id="@+id/opp_hand_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -45,13 +45,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/AI_hand_4"
+        app:layout_constraintEnd_toStartOf="@+id/opp_hand_4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/AI_hand_2"
+        app:layout_constraintStart_toEndOf="@+id/opp_hand_2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/AI_hand_4"
+        android:id="@+id/opp_hand_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

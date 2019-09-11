@@ -37,69 +37,69 @@
         app:layout_constraintVertical_bias="0.84000003" />
 
     <Button
-        android:id="@+id/no_AI_1"
+        android:id="@+id/no_Opp_2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="1"
+        android:text="2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/no_AI_2"
+        app:layout_constraintEnd_toStartOf="@+id/no_Opp_3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.58" />
 
     <Button
-        android:id="@+id/no_AI_2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/no_AI_3"
-        app:layout_constraintStart_toEndOf="@+id/no_AI_1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58" />
-
-    <Button
-        android:id="@+id/no_AI_3"
+        android:id="@+id/no_Opp_3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:text="3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/no_AI_4"
-        app:layout_constraintStart_toEndOf="@+id/no_AI_2"
+        app:layout_constraintEnd_toStartOf="@+id/no_Opp_4"
+        app:layout_constraintStart_toEndOf="@+id/no_Opp_2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.58" />
 
     <Button
-        android:id="@+id/no_AI_4"
+        android:id="@+id/no_Opp_4"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:text="4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/no_AI_5"
-        app:layout_constraintStart_toEndOf="@+id/no_AI_3"
+        app:layout_constraintEnd_toStartOf="@+id/no_Opp_5"
+        app:layout_constraintStart_toEndOf="@+id/no_Opp_3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.58" />
 
     <Button
-        android:id="@+id/no_AI_5"
+        android:id="@+id/no_Opp_5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/no_Opp_6"
+        app:layout_constraintStart_toEndOf="@+id/no_Opp_4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
+
+    <Button
+        android:id="@+id/no_Opp_6"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="5"
+        android:text="6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/no_AI_4"
+        app:layout_constraintStart_toEndOf="@+id/no_Opp_5"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.58" />
 
@@ -111,7 +111,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Number of AIs:"
+        android:text="Number of Opponents:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

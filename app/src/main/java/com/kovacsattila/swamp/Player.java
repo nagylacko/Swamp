@@ -2,11 +2,7 @@ package com.kovacsattila.swamp;
 
 import java.util.ArrayList;
 
-/**
- * Created by Kovács Attila on 2019-03-18.
- */
-
-public class Player {
+public abstract class Player {
 
     protected ArrayList<Card> cards;
 
@@ -45,9 +41,7 @@ public class Player {
         }
     }
 
-    public void updateScreen(final PartyActivity partyActivity) {
-
-    }
+    public abstract void updateScreen(final PartyActivity partyActivity);
 
     public void hit() {
 

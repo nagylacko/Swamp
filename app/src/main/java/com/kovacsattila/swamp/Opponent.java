@@ -11,14 +11,14 @@ import java.util.ArrayList;
  * Created by Kovács Attila on 2019-03-18.
  */
 
-public class AIPlayer extends Player {
+public class Opponent extends Player {
 
     private static int index = 0;
     private int myIndex;
 
     private TextView myText;
 
-    public AIPlayer() {
+    public Opponent() {
         super();
         myIndex = index++;
     }
@@ -29,11 +29,12 @@ public class AIPlayer extends Player {
         final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
 
         ArrayList<TextView> textViews = new ArrayList<>();
-        textViews.add((TextView) partyActivity.findViewById(R.id.AI_hand_0));
-        textViews.add((TextView) partyActivity.findViewById(R.id.AI_hand_1));
-        textViews.add((TextView) partyActivity.findViewById(R.id.AI_hand_2));
-        textViews.add((TextView) partyActivity.findViewById(R.id.AI_hand_3));
-        textViews.add((TextView) partyActivity.findViewById(R.id.AI_hand_4));
+        textViews.add((TextView) partyActivity.findViewById(R.id.opp_hand_0));
+        textViews.add((TextView) partyActivity.findViewById(R.id.opp_hand_1));
+        textViews.add((TextView) partyActivity.findViewById(R.id.opp_hand_2));
+        textViews.add((TextView) partyActivity.findViewById(R.id.opp_hand_3));
+        textViews.add((TextView) partyActivity.findViewById(R.id.opp_hand_4));
+        textViews.add((TextView) partyActivity.findViewById(R.id.opp_hand_5));
 
         myText = textViews.get(myIndex);
         myText.setVisibility(View.VISIBLE);
@@ -41,8 +42,12 @@ public class AIPlayer extends Player {
 //        Log.i("tag", Integer.toString((int) (partyConstLayout.getWidth() * (myIndex + 1) / (index + 1)) - (myText.getWidth() / 2)));
 //        Log.i("tag", Integer.toString((int) (partyConstLayout.getWidth() * (myIndex + 1) / (index + 1))));
 //        Log.i("tag", Integer.toString((int) (myText.getWidth() / 2)));
-        Log.i("tag", Integer.toString((int) (partyConstLayout.getWidth() * (myIndex + (index == 1 ? 1 : 0) / (index + 1)) /*- (myText.getWidth() / 2)*/)));
-        myText.setX((partyConstLayout.getWidth() * (myIndex + (index == 1 ? 1 : 0) / (index + 1)) /*- (myText.getWidth() / 2)*/));
+
+//        Log.i("tag", Integer.toString((partyConstLayout.getWidth() * (myIndex + (index == 1 ? 1 : 0) / (index + 1)) /*- (myText.getWidth() / 2)*/)));
+//        myText.setX((partyConstLayout.getWidth() * (myIndex + (index == 1 ? 1 : 0) / (index + 1)) /*- (myText.getWidth() / 2)*/));
+
+        //temporary solution
+        myText.setX(myIndex * 400);
 
         //list the cards
         String temp = "";

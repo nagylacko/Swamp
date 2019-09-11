@@ -9,13 +9,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int noOfAIs;
+    private int noOfOpponents;
 
     private ArrayList<Player> players = new ArrayList<>();
 
@@ -38,83 +37,83 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Players.init(noOfAIs);
+                PlayersList.init(noOfOpponents);
 
                 Intent intent = new Intent(MainActivity.this, PartyActivity.class);
                 startActivity(intent);
             }
         });
 
-        final Button noAI1 = findViewById(R.id.no_AI_1);
-        final Button noAI2 = findViewById(R.id.no_AI_2);
-        final Button noAI3 = findViewById(R.id.no_AI_3);
-        final Button noAI4 = findViewById(R.id.no_AI_4);
-        final Button noAI5 = findViewById(R.id.no_AI_5);
+        final Button noOpp2 = findViewById(R.id.no_Opp_2);
+        final Button noOpp3 = findViewById(R.id.no_Opp_3);
+        final Button noOpp4 = findViewById(R.id.no_Opp_4);
+        final Button noOpp5 = findViewById(R.id.no_Opp_5);
+        final Button noOpp6 = findViewById(R.id.no_Opp_6);
 
-        noOfAIs = 1;
-        noAI2.setTextColor(Color.WHITE);
-        noAI2.setTextColor(Color.GRAY);
-        noAI3.setTextColor(Color.GRAY);
-        noAI4.setTextColor(Color.GRAY);
-        noAI5.setTextColor(Color.GRAY);
+        noOfOpponents = 1;
+        noOpp3.setTextColor(Color.WHITE);
+        noOpp3.setTextColor(Color.GRAY);
+        noOpp4.setTextColor(Color.GRAY);
+        noOpp5.setTextColor(Color.GRAY);
+        noOpp6.setTextColor(Color.GRAY);
 
-        noAI1.setOnClickListener(new View.OnClickListener() {
+        noOpp2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noAI1.setTextColor(Color.WHITE);
-                noAI2.setTextColor(Color.GRAY);
-                noAI3.setTextColor(Color.GRAY);
-                noAI4.setTextColor(Color.GRAY);
-                noAI5.setTextColor(Color.GRAY);
-                noOfAIs = 1;
+                noOpp2.setTextColor(Color.WHITE);
+                noOpp3.setTextColor(Color.GRAY);
+                noOpp4.setTextColor(Color.GRAY);
+                noOpp5.setTextColor(Color.GRAY);
+                noOpp6.setTextColor(Color.GRAY);
+                noOfOpponents = 2;
             }
         });
 
-        noAI2.setOnClickListener(new View.OnClickListener() {
+        noOpp3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noAI1.setTextColor(Color.GRAY);
-                noAI2.setTextColor(Color.WHITE);
-                noAI3.setTextColor(Color.GRAY);
-                noAI4.setTextColor(Color.GRAY);
-                noAI5.setTextColor(Color.GRAY);
-                noOfAIs = 2;
+                noOpp2.setTextColor(Color.GRAY);
+                noOpp3.setTextColor(Color.WHITE);
+                noOpp4.setTextColor(Color.GRAY);
+                noOpp5.setTextColor(Color.GRAY);
+                noOpp6.setTextColor(Color.GRAY);
+                noOfOpponents = 3;
             }
         });
 
-        noAI3.setOnClickListener(new View.OnClickListener() {
+        noOpp4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noAI1.setTextColor(Color.GRAY);
-                noAI2.setTextColor(Color.GRAY);
-                noAI3.setTextColor(Color.WHITE);
-                noAI4.setTextColor(Color.GRAY);
-                noAI5.setTextColor(Color.GRAY);
-                noOfAIs = 3;
+                noOpp2.setTextColor(Color.GRAY);
+                noOpp3.setTextColor(Color.GRAY);
+                noOpp4.setTextColor(Color.WHITE);
+                noOpp5.setTextColor(Color.GRAY);
+                noOpp6.setTextColor(Color.GRAY);
+                noOfOpponents = 4;
             }
         });
 
-        noAI4.setOnClickListener(new View.OnClickListener() {
+        noOpp5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noAI1.setTextColor(Color.GRAY);
-                noAI2.setTextColor(Color.GRAY);
-                noAI3.setTextColor(Color.GRAY);
-                noAI4.setTextColor(Color.WHITE);
-                noAI5.setTextColor(Color.GRAY);
-                noOfAIs = 4;
+                noOpp2.setTextColor(Color.GRAY);
+                noOpp3.setTextColor(Color.GRAY);
+                noOpp4.setTextColor(Color.GRAY);
+                noOpp5.setTextColor(Color.WHITE);
+                noOpp6.setTextColor(Color.GRAY);
+                noOfOpponents = 5;
             }
         });
 
-        noAI5.setOnClickListener(new View.OnClickListener() {
+        noOpp6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noAI1.setTextColor(Color.GRAY);
-                noAI2.setTextColor(Color.GRAY);
-                noAI3.setTextColor(Color.GRAY);
-                noAI4.setTextColor(Color.GRAY);
-                noAI5.setTextColor(Color.WHITE);
-                noOfAIs = 5;
+                noOpp2.setTextColor(Color.GRAY);
+                noOpp3.setTextColor(Color.GRAY);
+                noOpp4.setTextColor(Color.GRAY);
+                noOpp5.setTextColor(Color.GRAY);
+                noOpp6.setTextColor(Color.WHITE);
+                noOfOpponents = 6;
             }
         });
     }

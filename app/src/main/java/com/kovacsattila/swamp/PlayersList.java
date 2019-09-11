@@ -2,23 +2,19 @@ package com.kovacsattila.swamp;
 
 import java.util.ArrayList;
 
-/**
- * Created by Kovács Attila on 2019-05-19.
- */
-
 //Singleton class
-public final class Players {
+public final class PlayersList {
 
     private static ArrayList<Player> players = new ArrayList<>();
 
-    private Players() {
+    private PlayersList() {
         //private constructor, left empty on purpose
     }
 
-    public static void init(int noOfAIs) {
+    public static void init(int noOfOpponents) {
         players.add(new User());
-        for (int i = 0; i < noOfAIs; i++) {
-            players.add(new AIPlayer());
+        for (int i = 0; i < noOfOpponents; i++) {
+            players.add(new Opponent());
         }
     }
 
@@ -56,7 +52,6 @@ public final class Players {
     }
 
     public static void startParty(PartyActivity partyActivity) {
-
         Table.init();
         for (Player player : players) {
             player.hit();

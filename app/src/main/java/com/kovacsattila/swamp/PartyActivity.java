@@ -10,15 +10,15 @@ public class PartyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party);
 
-        Players.deal();
+        PlayersList.deal();
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-        Players.updateScreen(this);
+        PlayersList.updateScreen(this);
 
-        Players.startParty(this);
+        PlayersList.startParty(this);
     }
 }
