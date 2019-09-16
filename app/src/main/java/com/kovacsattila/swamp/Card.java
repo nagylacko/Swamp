@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
-/**
- * Created by Kovács Attila on 2019-03-18.
- */
+import java.util.ArrayList;
 
 public class Card {
 
@@ -19,10 +18,16 @@ public class Card {
 
     private static int colorSelector = 0;
 
+    private ImageView image;
+
+    private boolean playable;
+
     public Card(int rank) {
         this.rank = rank;
         suit = colorSelector++;
         colorSelector %= 4;
+        image = null;
+        playable = false;
     }
 
     public Card(Card card) {
@@ -37,7 +42,6 @@ public class Card {
     public int getSuit() {
         return suit;
     }
-
 
     public Bitmap getBitmap(Activity activity) {
         int id = R.drawable.joker;
@@ -226,4 +230,19 @@ public class Card {
         return ((BitmapDrawable) drawable).getBitmap();
     }
 
+    public void setImage(ImageView image) {
+        this.image = image;
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
+
+    public boolean getPlayable(){
+        return playable;
+    }
+
+    public void setPlayable(boolean playable){
+        this.playable = playable;
+    }
 }

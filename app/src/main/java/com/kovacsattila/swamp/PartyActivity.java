@@ -17,8 +17,8 @@ public class PartyActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-        PlayersList.updateScreen(this);
-
-        PlayersList.startParty(this);
+        PlayersList.initScreen(this);
+        PlayersList.initParty();
+        PlayersList.playParty();
     }
 }

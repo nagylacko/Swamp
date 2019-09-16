@@ -1,32 +1,42 @@
 package com.kovacsattila.swamp;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public abstract class Player {
 
+    protected int ID;
+
     protected ArrayList<Card> cards;
 
-    protected Role role;
+    protected int role;
 
     protected enum Role {A, B, C, D, X}
 
-    public Player() {
+    protected int noOfJokers;
+
+    protected PartyActivity partyActivity;
+
+    public Player(int role) {
 
         cards = new ArrayList<>();
 
-        //
-        role = Role.X;
+        this.role = role;
+        ID = role;
+
+        noOfJokers = 0;
     }
 
-    public ArrayList<Card> getHand() {
-        return cards;
+    public final void addCard(Card card) {
+        if (card.getRank() == 15){
+            noOfJokers++;
+        } else {
+            cards.add(card);
+        }
     }
 
-    public void addCard(Card card) {
-        cards.add(card);
-    }
-
-    public void sortCards() {
+    public final void sortCards() {
         boolean flag = true;
         while (flag) {
             flag = false;
@@ -39,15 +49,28 @@ public abstract class Player {
                 }
             }
         }
+        /**
+         * Log
+         **/
+        Log.d("GAME", this.getClass().toString().substring(29) + "_" + Integer.toString(ID) + " was dealt the following cards:");
+        String log = "";
+        for (Card c : cards) {
+            log += Integer.toString(c.getRank()) + ",";
+        }
+        Log.d("GAME", log);
     }
 
-    public abstract void updateScreen(final PartyActivity partyActivity);
-
-    public void hit() {
-
+    public final int getRole() {
+        return role;
     }
 
-    public boolean haveCards() {
+    public void initScreen(final PartyActivity partyActivity){
+        this.partyActivity = partyActivity;
+    }
+
+    public abstract void hit(boolean isFirst);
+
+    public final boolean haveCards() {
         if (cards.size() > 0) {
             return true;
         } else {
@@ -56,4 +79,11 @@ public abstract class Player {
 
     }
 
+    /**
+     * Methods for testing
+     **/
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 }

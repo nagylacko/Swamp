@@ -1,10 +1,5 @@
 package com.kovacsattila.swamp;
 
-/**
- * Created by Kovács Attila on 2019-05-26.
- */
-
-//Singleton class
 public final class Table {
 
     //number of cards and highest rank in a single round
@@ -29,6 +24,7 @@ public final class Table {
         return rank;
     }
 
+    //it will not be used
     public static boolean isFirst() {
         return isFirst;
     }

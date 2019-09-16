@@ -1,5 +1,6 @@
 package com.kovacsattila.swamp;
 
+import android.app.ActionBar;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,12 +13,16 @@ import java.util.ArrayList;
 
 public class User extends Player {
 
-    public User() {
-        super();
+    int Y;
+
+    public User(int role) {
+        super(role);
+        Y = 0;
     }
 
     @Override
-    public void updateScreen(final PartyActivity partyActivity) {
+    public void initScreen(final PartyActivity partyActivity) {
+        super.initScreen(partyActivity);
 
         final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
 
@@ -31,13 +36,14 @@ public class User extends Player {
         double groupOverlap = 0.4 * cardWidth;
 
         int movingX = (int) leftOffset;
+        Y = (int) (partyConstLayout.getHeight() * 0.6);
 
         for (int i = 0; i < cards.size(); i++) {
-            ImageView card = new ImageView(partyActivity);
+            ImageView cardImage = new ImageView(partyActivity);
 
             Bitmap bitmap = cards.get(i).getBitmap(partyActivity);
             Drawable drawable = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) cardWidth, (int) cardHeight, true));
-            card.setImageDrawable(drawable);
+            cardImage.setImageDrawable(drawable);
 
             if (i == 0) {
                 //nothing
@@ -47,110 +53,119 @@ public class User extends Player {
                 movingX += cardOverlap;
             }
 
-            card.setX(movingX);
-            card.setY((int) (partyConstLayout.getHeight() * 0.6));
+            cardImage.setX(movingX);
+            cardImage.setY(Y);
 
-            final int j = i;
-            card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.i("click", Integer.toString(cards.get(j).getRank()));
-                }
-            });
+            partyConstLayout.addView(cardImage);
 
-            partyConstLayout.addView(card);
-        }
-    }
-
-    //@Override //tested, works fine
-    public void updateScreen_ver_2(final PartyActivity partyActivity) {
-
-        final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
-
-        //Calculate the total width in imaginary units
-        //Card width is 100 imaginary unit
-        //Overlap is the width ratio, which can be seen behind the next card
-        double overlap = 0.2;
-        //10 imaginary units at left, cards, 10 at right, in one row
-        double totalImaginaryWidth = 10 + ((cards.size() - 1) * 100 * overlap) + 100 + 10;
-        //Calculating the ratio between the real and imaginary row length
-        //double ratio = totalImaginaryWidth / partyConstLayout.getWidth();
-        double ratio = partyConstLayout.getWidth() / totalImaginaryWidth;
-
-        for (int i = 0; i < cards.size(); i++) {
-            ImageView card = new ImageView(partyActivity);
-
-            Bitmap bitmap = cards.get(i).getBitmap(partyActivity);
-            //Drawable drawable = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * ratio), (int) (bitmap.getHeight() * ratio), true));
-            Drawable drawable = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) (100 * ratio), (int) (100 * bitmap.getHeight() * ratio / bitmap.getWidth()), true));
-            card.setImageDrawable(drawable);
-
-            //10 imaginary pixels * ratio offset at left
-            card.setX((int) ((10 * ratio) + (i * 100 * ratio * overlap)));
-            card.setY((int) (partyConstLayout.getHeight() * 0.45));
-
-//            Log.i(Integer.toString(i), Integer.toString((partyConstLayout.getHeight() / 2) + (int) (bitmap.getHeight() * ratio) * (int) Math.floor(i / cardsInRow)));
-//            Log.i(Integer.toString(i), Integer.toString((int) (bitmap.getWidth() * ratio)));
-//            Log.i(Integer.toString(i), Integer.toString((int) (bitmap.getHeight() * ratio)));
-
-            final int j = i;
-            card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.i("click", Integer.toString(cards.get(j).getRank()));
-                }
-            });
-
-            partyConstLayout.addView(card);
-        }
-    }
-
-    //@Override //tested, works fine
-    public void updateScreen_ver_1(final PartyActivity partyActivity) {
-
-        final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
-
-        //Calculating the size of the cards
-        //10 pixels offset at left, 10 cards in a row, 10% space after each card
-        int cardsInRow = 12;
-        double spacing = (partyConstLayout.getWidth() - 10) / cardsInRow;
-        double cardWidth = spacing * 0.9;
-
-        ArrayList<ImageView> cardImages = new ArrayList<>();
-
-        for (int i = 0; i < cards.size(); i++) {
-            ImageView card = new ImageView(partyActivity);
-
-            Bitmap bitmap = cards.get(i).getBitmap(partyActivity);
-            double ratio = cardWidth / bitmap.getWidth();
-            Drawable drawable = new BitmapDrawable(partyActivity.getResources(), Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * ratio), (int) (bitmap.getHeight() * ratio), true));
-            card.setImageDrawable(drawable);
-
-            //10 pixels offset at left
-            card.setX((int) (10 + ((i % cardsInRow) * spacing)));
-            card.setY((int) (partyConstLayout.getHeight() * 0.45) + (int) (bitmap.getHeight() * ratio * 0.5) * (int) Math.floor(i / cardsInRow));
-
-//            Log.i(Integer.toString(i), Integer.toString((partyConstLayout.getHeight() / 2) + (int) (bitmap.getHeight() * ratio) * (int) Math.floor(i / cardsInRow)));
-//            Log.i(Integer.toString(i), Integer.toString((int) (bitmap.getWidth() * ratio)));
-//            Log.i(Integer.toString(i), Integer.toString((int) (bitmap.getHeight() * ratio)));
-
-            final int j = i;
-            card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.i("click", Integer.toString(cards.get(j).getRank()));
-                }
-            });
-
-            cardImages.add(card);
-
-            partyConstLayout.addView(card);
+            cards.get(i).setImage(cardImage);
         }
     }
 
     @Override
-    public void hit() {
-        Table.getNumber();
-        Table.getRank();
+    public void hit(boolean isFirst) {
+
+        int liftY = (int) (Y * 0.95);
+
+        setCardPlayable();
+
+        for (int i = 0; i < cards.size(); i++) {
+            final boolean first = isFirst;
+            final int index = i;
+            if (cards.get(i).getPlayable() || isFirst) {
+                cards.get(i).getImage().setY(liftY);
+                cards.get(i).getImage().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        continueHit(first, index);
+                        Log.d("GAME", "Click on card: " + Integer.toString(cards.get(index).getRank()));
+                    }
+                });
+            } else {
+                cards.get(i).getImage().setY(Y);
+                cards.get(i).getImage().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("GAME", "Click on card: " + Integer.toString(cards.get(index).getRank()));
+                    }
+                });
+            }
+        }
+        /**
+         * Log
+         **/
+        Log.d("GAME", "Waiting for User to hit");
+        if (isFirst) {
+            Log.d("GAME", "User is the first in this round");
+        } else {
+            Log.d("GAME", "User is NOT the first in this round");
+            Log.d("GAME", "User`s cards, and playable status below:");
+            String log = "";
+            for (Card c : cards) {
+                log += Integer.toString(c.getRank()) + ",";
+            }
+            Log.d("GAME", log);
+            log = "";
+            for (Card c : cards) {
+                log += c.getPlayable() ? "1" : "0" + ",";
+            }
+            Log.d("GAME", log);
+        }
+    }
+
+    //continueHit is called by User onClick event on a card
+    private void continueHit(boolean isFirst, int index) {
+        Table.setRank(cards.get(index).getRank());
+        ArrayList<Integer> group = getCardGroup(cards.get(index).getRank());
+        if (isFirst) {
+            Table.setNumber(group.indexOf(index) + 1);
+        }
+        for (int i = 0; i < Table.getNumber(); i++) {
+            cards.get(group.get(0)).getImage().setVisibility(View.GONE);
+            int j = group.get(0);
+            cards.remove(j);
+        }
+        PlayersList.playParty();
+        /**
+         * Log
+         **/
+        String log = "";
+        for (int i : group) {
+            log += Integer.toString(i) + ",";
+        }
+        Log.d("GAME", "The following cards were thrown:" + log);
+        Log.d("GAME", "The User has the following cards:");
+        log = "";
+        for (Card c : cards) {
+            log += Integer.toString(c.getRank()) + ",";
+        }
+        Log.d("GAME", log);
+    }
+
+    //set playable field of every card according to current Table state
+    public void setCardPlayable() {
+        //i is rank
+        for (int i = 0; i < 16; i++) {
+            if (i <= Table.getRank() || getCardGroup(i).size() < Table.getNumber()) {
+                for (int j : getCardGroup(i)) {
+                    cards.get(j).setPlayable(false);
+                }
+            } else {
+                for (int j = 0; j < getCardGroup(i).size(); j++) {
+                    cards.get(getCardGroup(i).get(j)).setPlayable(j < Table.getNumber());
+                }
+            }
+        }
+    }
+
+    //getCardGroup returns indexes of cards of given rank
+    public ArrayList<Integer> getCardGroup(int rank) {
+        ArrayList<Integer> indexes = new ArrayList<>();
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getRank() == rank) {
+                indexes.add(i);
+            }
+        }
+        return indexes;
     }
 }

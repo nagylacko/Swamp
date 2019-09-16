@@ -2,19 +2,20 @@ package com.kovacsattila.swamp;
 
 import java.util.ArrayList;
 
-//Singleton class
 public final class PlayersList {
 
     private static ArrayList<Player> players = new ArrayList<>();
+
+    private static int currentPlayer, lastPlayer, lastPlayerWhoHit;
 
     private PlayersList() {
         //private constructor, left empty on purpose
     }
 
     public static void init(int noOfOpponents) {
-        players.add(new User());
+        players.add(new User(0));
         for (int i = 0; i < noOfOpponents; i++) {
-            players.add(new Opponent());
+            players.add(new Opponent(i + 1));
         }
     }
 
@@ -45,17 +46,47 @@ public final class PlayersList {
         }
     }
 
-    public static void updateScreen(PartyActivity partyActivity) {
+    public static void initScreen(PartyActivity partyActivity) {
         for (Player player : players) {
-            player.updateScreen(partyActivity);
+            player.initScreen(partyActivity);
         }
     }
 
-    public static void startParty(PartyActivity partyActivity) {
+    public static void initParty() {
         Table.init();
-        for (Player player : players) {
-            player.hit();
-            player.updateScreen(partyActivity);
+        currentPlayer = 0;
+    }
+
+    //playParty is called by User::continueHit after User onClick event on a card
+    public static void playParty() {
+
+
+
+//        players.get(currentPlayer).hit(true);
+//
+//        while (currentPlayer != lastPlayer) {
+//            players.get(i).hit(i == 0 ? true : false);
+//            if (players.get(i).getClass().toString().equals("class com.kovacsattila.swamp.User")) {
+//                break;
+//            }
+//        }
+
+        //recursion could be used here
+    }
+
+    public static void sortPlayers() {
+        ArrayList<Player> temp = new ArrayList<>();
+        for (int i = 0; i < players.size(); i++) {
+            temp.add(players.get(i).getRole(), players.get(i));
         }
+        players = temp;
+    }
+
+    /**
+     * Methods for testing
+     **/
+
+    public static ArrayList<Player> testGetPlayers() {
+        return players;
     }
 }

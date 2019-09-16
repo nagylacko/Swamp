@@ -7,10 +7,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Kovács Attila on 2019-03-18.
- */
-
 public class Opponent extends Player {
 
     private static int index = 0;
@@ -18,13 +14,14 @@ public class Opponent extends Player {
 
     private TextView myText;
 
-    public Opponent() {
-        super();
+    public Opponent(int role) {
+        super(role);
         myIndex = index++;
     }
 
     @Override
-    public void updateScreen(final PartyActivity partyActivity) {
+    public void initScreen(final PartyActivity partyActivity) {
+        super.initScreen(partyActivity);
 
         final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
 
@@ -63,8 +60,9 @@ public class Opponent extends Player {
         myText.setText("AI_player_" + myIndex + "\n" + "Here is the hand:" + "\n" + temp);
     }
 
+    //isFirst is doubled up?
     @Override
-    public void hit() {
+    public void hit(boolean isFirst) {
         if (Table.isFirst()) {
             Table.setNumber(numberOfSameRank(cards.get(0).getRank()));
             Table.setRank(cards.get(0).getRank());
