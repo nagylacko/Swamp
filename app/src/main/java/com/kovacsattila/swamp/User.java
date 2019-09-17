@@ -21,10 +21,12 @@ public class User extends Player {
     }
 
     @Override
-    public void initScreen(final PartyActivity partyActivity) {
-        super.initScreen(partyActivity);
+    public void initScreen(final PartyActivity partyActivity, final int noOfPlayers) {
+        super.initScreen(partyActivity, noOfPlayers);
 
         final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
+
+        //for derailed description see \Swamp\app\src\main\res\drawable\partyscreen_layout_1.png
 
         double originalCardWidth = 691; //original size of card images
         double originalCardHeight = 1056; //original size of card images
@@ -63,22 +65,22 @@ public class User extends Player {
     }
 
     @Override
-    public void hit(boolean isFirst) {
+    public void hit() {
 
         int liftY = (int) (Y * 0.95);
 
         setCardPlayable();
 
         for (int i = 0; i < cards.size(); i++) {
-            final boolean first = isFirst;
+            final boolean isFirst = Table.isFirst;
             final int index = i;
-            if (cards.get(i).getPlayable() || isFirst) {
+            if (cards.get(i).getPlayable() || Table.isFirst) {
                 cards.get(i).getImage().setY(liftY);
                 cards.get(i).getImage().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        continueHit(first, index);
-                        Log.d("GAME", "Click on card: " + Integer.toString(cards.get(index).getRank()));
+                        Table.didLastPlayerHit = true;
+                        continueHit(isFirst, index);
                     }
                 });
             } else {
@@ -95,7 +97,7 @@ public class User extends Player {
          * Log
          **/
         Log.d("GAME", "Waiting for User to hit");
-        if (isFirst) {
+        if (Table.isFirst) {
             Log.d("GAME", "User is the first in this round");
         } else {
             Log.d("GAME", "User is NOT the first in this round");
@@ -107,7 +109,7 @@ public class User extends Player {
             Log.d("GAME", log);
             log = "";
             for (Card c : cards) {
-                log += c.getPlayable() ? "1" : "0" + ",";
+                log += c.getPlayable() ? "1," : "0,";
             }
             Log.d("GAME", log);
         }
@@ -125,21 +127,22 @@ public class User extends Player {
             int j = group.get(0);
             cards.remove(j);
         }
-        PlayersList.playParty();
         /**
          * Log
          **/
         String log = "";
-        for (int i : group) {
-            log += Integer.toString(i) + ",";
+        for (int i = 0; i < Table.getNumber(); i++) {
+            log += Integer.toString(group.get(i)) + ",";
         }
-        Log.d("GAME", "The following cards were thrown:" + log);
-        Log.d("GAME", "The User has the following cards:");
+        Log.d("GAME", "User hits with the following indexes of cards: " + log);
+        Log.d("GAME", "User has the following cards:");
         log = "";
         for (Card c : cards) {
             log += Integer.toString(c.getRank()) + ",";
         }
         Log.d("GAME", log);
+
+        PlayersList.playParty();
     }
 
     //set playable field of every card according to current Table state

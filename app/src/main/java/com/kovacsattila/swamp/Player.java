@@ -64,11 +64,11 @@ public abstract class Player {
         return role;
     }
 
-    public void initScreen(final PartyActivity partyActivity){
+    public void initScreen(final PartyActivity partyActivity, final int noOfPlayers){
         this.partyActivity = partyActivity;
     }
 
-    public abstract void hit(boolean isFirst);
+    public abstract void hit();
 
     public final boolean haveCards() {
         if (cards.size() > 0) {

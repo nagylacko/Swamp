@@ -1,18 +1,21 @@
 package com.kovacsattila.swamp;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public final class PlayersList {
 
-    private static ArrayList<Player> players = new ArrayList<>();
+    private static ArrayList<Player> players;
 
-    private static int currentPlayer, lastPlayer, lastPlayerWhoHit;
+    private static int firstPlayer, currentPlayer, lastPlayer, lastPlayerWhoHit, hitCounter;
 
     private PlayersList() {
         //private constructor, left empty on purpose
     }
 
     public static void init(int noOfOpponents) {
+        players = new ArrayList<>();
         players.add(new User(0));
         for (int i = 0; i < noOfOpponents; i++) {
             players.add(new Opponent(i + 1));
@@ -48,30 +51,47 @@ public final class PlayersList {
 
     public static void initScreen(PartyActivity partyActivity) {
         for (Player player : players) {
-            player.initScreen(partyActivity);
+            player.initScreen(partyActivity, players.size());
         }
     }
 
     public static void initParty() {
         Table.init();
-        currentPlayer = 0;
+
+        currentPlayer = -1;
+        hitCounter = 0;
     }
 
     //playParty is called by User::continueHit after User onClick event on a card
     public static void playParty() {
 
+        if (Table.didLastPlayerHit) {
+            lastPlayerWhoHit = currentPlayer;
+            Table.didLastPlayerHit = false;
+        }
 
+        currentPlayer = (currentPlayer + 1) % players.size();
 
-//        players.get(currentPlayer).hit(true);
-//
-//        while (currentPlayer != lastPlayer) {
-//            players.get(i).hit(i == 0 ? true : false);
-//            if (players.get(i).getClass().toString().equals("class com.kovacsattila.swamp.User")) {
-//                break;
-//            }
-//        }
+        if (hitCounter == players.size()) {
+            //end of round
+            currentPlayer = lastPlayerWhoHit;
+            hitCounter = 0;
+            Table.isFirst = true;
+            Log.d("GAME", "----- End of Round -----");
+        }
 
-        //recursion could be used here
+        hitCounter++;
+        if (players.get(currentPlayer).haveCards()) {
+            players.get(currentPlayer).hit();
+            Table.isFirst = false;
+            if (players.get(currentPlayer).getClass().toString().equals("class com.kovacsattila.swamp.User")) {
+                //the recursion will not continue
+                return;
+            } else {
+                //recursion
+                PlayersList.playParty();
+            }
+        }
     }
 
     public static void sortPlayers() {

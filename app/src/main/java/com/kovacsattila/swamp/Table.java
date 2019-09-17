@@ -4,7 +4,8 @@ public final class Table {
 
     //number of cards and highest rank in a single round
     private static int number, rank;
-    private static boolean isFirst;
+    public static boolean isFirst;
+    public static boolean didLastPlayerHit;
 
     private Table() {
         //private constructor, left empty on purpose
@@ -14,6 +15,7 @@ public final class Table {
         number = 0;
         rank = 0;
         isFirst = true;
+        didLastPlayerHit = false;
     }
 
     public static int getNumber() {
@@ -24,14 +26,9 @@ public final class Table {
         return rank;
     }
 
-    //it will not be used
-    public static boolean isFirst() {
-        return isFirst;
-    }
 
     public static void setNumber(int numberOfCards) {
         number = numberOfCards;
-        isFirst = false;
     }
 
     public static void setRank(int cardRank) {
