@@ -3,9 +3,9 @@ package com.kovacsattila.swamp;
 public final class Table {
 
     //number of cards and highest rank in a single round
-    private static int number, rank;
-    public static boolean isFirst;
-    public static boolean didLastPlayerHit;
+    private static volatile int number, rank;
+    public static volatile boolean isFirst;
+    public static volatile boolean didLastPlayerHit;
 
     private Table() {
         //private constructor, left empty on purpose

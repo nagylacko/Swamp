@@ -14,6 +14,7 @@ public final class PlayersList {
         //private constructor, left empty on purpose
     }
 
+    //PlayersList::init called by onClick event in MainActivity
     public static void init(int noOfOpponents) {
         players = new ArrayList<>();
         players.add(new User(0));
@@ -62,6 +63,14 @@ public final class PlayersList {
         hitCounter = 0;
     }
 
+    public static Player get(int index) {
+        return players.get(index);
+    }
+
+    public static int size() {
+        return players.size();
+    }
+
     //playParty is called by User::continueHit after User onClick event on a card
     public static void playParty() {
 
@@ -91,6 +100,12 @@ public final class PlayersList {
                 //recursion
                 PlayersList.playParty();
             }
+        }
+    }
+
+    public static void clearTable() {
+        for (Player p : players){
+            p.clearTable();
         }
     }
 

@@ -1,6 +1,5 @@
 package com.kovacsattila.swamp;
 
-import android.app.ActionBar;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 public class User extends Player {
 
-    int Y;
+    private int Y;
 
     public User(int role) {
         super(role);
@@ -26,7 +25,7 @@ public class User extends Player {
 
         final ConstraintLayout partyConstLayout = partyActivity.findViewById(R.id.party_const_layout);
 
-        //for derailed description see \Swamp\app\src\main\res\drawable\partyscreen_layout_1.png
+        //for detailed description see \Swamp\app\src\main\res\drawable\partyscreen_layout_1.png
 
         double originalCardWidth = 691; //original size of card images
         double originalCardHeight = 1056; //original size of card images
@@ -88,11 +87,21 @@ public class User extends Player {
                 cards.get(i).getImage().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.d("GAME", "Click on card: " + Integer.toString(cards.get(index).getRank()));
+                        Log.d("GAME", "Click on card: " +
+                                Integer.toString(cards.get(index).getRank()) + " ,but no action");
                     }
                 });
             }
         }
+        final boolean isFirst = Table.isFirst;
+        partyActivity.findViewById(R.id.pass_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Table.didLastPlayerHit = true;
+                continueHit(isFirst, -1);
+            }
+        });
+
         /**
          * Log
          **/
@@ -117,32 +126,36 @@ public class User extends Player {
 
     //continueHit is called by User onClick event on a card
     private void continueHit(boolean isFirst, int index) {
-        Table.setRank(cards.get(index).getRank());
-        ArrayList<Integer> group = getCardGroup(cards.get(index).getRank());
-        if (isFirst) {
-            Table.setNumber(group.indexOf(index) + 1);
+        if (index != -1) {
+            Table.setRank(cards.get(index).getRank());
+            ArrayList<Integer> group = getCardGroup(cards.get(index).getRank());
+            if (isFirst) {
+                Table.setNumber(group.indexOf(index) + 1);
+            }
+            for (int i = 0; i < Table.getNumber(); i++) {
+                cards.get(group.get(0)).getImage().setVisibility(View.GONE);
+                int j = group.get(0);
+                cards.remove(j);
+            }
+            /**
+             * Log
+             **/
+            String log = "";
+            for (int i = 0; i < Table.getNumber(); i++) {
+                log += Integer.toString(group.get(i)) + ",";
+            }
+            Log.d("GAME", "User hits with the following indexes of cards: " + log);
+            Log.d("GAME", "User has the following cards:");
+            log = "";
+            for (Card c : cards) {
+                log += Integer.toString(c.getRank()) + ",";
+            }
+            Log.d("GAME", log);
+        } else {
+            Log.d("GAME", "User passed");
         }
-        for (int i = 0; i < Table.getNumber(); i++) {
-            cards.get(group.get(0)).getImage().setVisibility(View.GONE);
-            int j = group.get(0);
-            cards.remove(j);
-        }
-        /**
-         * Log
-         **/
-        String log = "";
-        for (int i = 0; i < Table.getNumber(); i++) {
-            log += Integer.toString(group.get(i)) + ",";
-        }
-        Log.d("GAME", "User hits with the following indexes of cards: " + log);
-        Log.d("GAME", "User has the following cards:");
-        log = "";
-        for (Card c : cards) {
-            log += Integer.toString(c.getRank()) + ",";
-        }
-        Log.d("GAME", log);
 
-        PlayersList.playParty();
+        MainThread.wait4User.set(false);
     }
 
     //set playable field of every card according to current Table state

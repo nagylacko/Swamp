@@ -79,6 +79,10 @@ public abstract class Player {
 
     }
 
+    public void clearTable() {
+        //left empty on purpose
+    }
+
     /**
      * Methods for testing
      **/
