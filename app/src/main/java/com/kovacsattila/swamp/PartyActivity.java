@@ -13,9 +13,6 @@ public class PartyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party);
-
-        //the previous method
-//        PlayersList.deal();
     }
 
     @Override
@@ -27,16 +24,12 @@ public class PartyActivity extends AppCompatActivity {
 
         mainThread = new MainThread(this);
         mainThread.start();
-
-        //the previous method
-//        PlayersList.initScreen(this);
-//        PlayersList.initParty();
-//        PlayersList.playParty();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d("GAME", "Party activity was paused");
 
         try {
             mainThread.stopThread.set(true);

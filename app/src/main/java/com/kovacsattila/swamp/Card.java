@@ -6,8 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-
 public class Card {
 
     //rank = 3...14 -> 3...Ace
@@ -238,11 +236,11 @@ public class Card {
         return image;
     }
 
-    public boolean getPlayable(){
+    public boolean getPlayable() {
         return playable;
     }
 
-    public void setPlayable(boolean playable){
+    public void setPlayable(boolean playable) {
         this.playable = playable;
     }
 }

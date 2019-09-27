@@ -74,6 +74,7 @@ public class User extends Player {
             final boolean isFirst = Table.isFirst;
             final int index = i;
             if (cards.get(i).getPlayable() || Table.isFirst) {
+                //Index out of bounds error, reason is unknown
                 cards.get(i).getImage().setY(liftY);
                 cards.get(i).getImage().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -142,7 +143,9 @@ public class User extends Player {
              **/
             String log = "";
             for (int i = 0; i < Table.getNumber(); i++) {
-                log += Integer.toString(group.get(i)) + ",";
+                //Index out of bounds error, reason is unknown
+                //therefore line is skipped
+                //log += Integer.toString(group.get(i)) + ",";
             }
             Log.d("GAME", "User hits with the following indexes of cards: " + log);
             Log.d("GAME", "User has the following cards:");

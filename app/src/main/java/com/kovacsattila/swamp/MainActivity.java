@@ -16,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     private int noOfOpponents;
 
-    private ArrayList<Player> players = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        Constants.SCREEN_WIDTH = dm.widthPixels;
-        Constants.SCREEN_HEIGHT = dm.heightPixels;
 
         setContentView(R.layout.activity_main);
 
